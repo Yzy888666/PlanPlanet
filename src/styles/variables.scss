@@ -1,0 +1,48 @@
+// 主题色彩
+$primary-color: #667eea;
+$secondary-color: #764ba2;
+$success-color: #67c23a;
+$warning-color: #e6a23c;
+$danger-color: #f56c6c;
+$info-color: #909399;
+
+// 背景色
+$bg-primary: #f8fafc;
+$bg-secondary: #ffffff;
+$bg-dark: #1a202c;
+
+// 文字色彩
+$text-primary: #2d3748;
+$text-secondary: #4a5568;
+$text-light: #718096;
+$text-white: #ffffff;
+
+// 边框色彩
+$border-light: #e2e8f0;
+$border-medium: #cbd5e0;
+$border-dark: #a0aec0;
+
+// 阴影
+$shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+// 圆角
+$radius-sm: 4px;
+$radius-md: 8px;
+$radius-lg: 12px;
+$radius-xl: 16px;
+
+// 间距
+$spacing-xs: 4px;
+$spacing-sm: 8px;
+$spacing-md: 16px;
+$spacing-lg: 24px;
+$spacing-xl: 32px;
+$spacing-2xl: 48px;
+
+// 断点
+$breakpoint-sm: 640px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+$breakpoint-xl: 1280px;
