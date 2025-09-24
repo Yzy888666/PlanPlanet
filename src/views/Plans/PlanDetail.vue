@@ -8,13 +8,9 @@
       </el-button>
 
       <div class="header-actions">
-        <el-button v-if="!plan?.isPublic" @click="sharePlan" :loading="sharing">
-          <el-icon><Share /></el-icon>
-          分享
-        </el-button>
-        <el-button v-else @click="unsharePlan" :loading="sharing">
-          <el-icon><Hide /></el-icon>
-          取消分享
+        <el-button :type="plan?.isPublic ? 'warning' : 'primary'" @click="toggleShare" :loading="sharing">
+          <el-icon><Hide v-if="plan?.isPublic" /><Share v-else /></el-icon>
+          {{ plan?.isPublic ? '设为私有' : '公开到广场' }}
         </el-button>
 
         <el-dropdown @command="handleAction">
@@ -254,6 +250,7 @@ import {
   Plus
 } from '@element-plus/icons-vue'
 import { usePlansStore } from '@/stores/plans'
+import { sharePlan as sharePlanApi, unsharePlan as unsharePlanApi } from '@/api/plans'
 import dayjs from 'dayjs'
 
 const route = useRoute()
@@ -369,29 +366,32 @@ const markComplete = async () => {
   }
 }
 
-// 分享计划
-const sharePlan = async () => {
-  sharing.value = true
+// 分享/私有切换
+const toggleShare = async () => {
+  const prev = !!plan.value?.isPublic
   try {
-    // 调用分享API
-    plan.value.isPublic = true
-    ElMessage.success('计划已分享到广场')
-  } catch (error) {
-    ElMessage.error('分享失败')
-  } finally {
-    sharing.value = false
-  }
-}
+    const title = prev ? '取消分享' : '分享计划'
+    const message = prev ? '确认将该计划设为私有？' : '确认将该计划公开到广场？'
+    await ElMessageBox.confirm(message, title, {
+      confirmButtonText: prev ? '设为私有' : '公开',
+      cancelButtonText: '取消',
+      type: prev ? 'warning' : 'primary'
+    })
 
-// 取消分享
-const unsharePlan = async () => {
-  sharing.value = true
-  try {
-    // 调用取消分享API
-    plan.value.isPublic = false
-    ElMessage.success('已取消分享')
+    sharing.value = true
+    if (prev) {
+      await unsharePlanApi(plan.value.id)
+      plan.value.isPublic = false
+      ElMessage.success('已设为私有')
+    } else {
+      await sharePlanApi(plan.value.id)
+      plan.value.isPublic = true
+      ElMessage.success('已公开到广场')
+    }
   } catch (error) {
-    ElMessage.error('取消分享失败')
+    if (error !== 'cancel') {
+      ElMessage.error(prev ? '设为私有失败' : '公开失败')
+    }
   } finally {
     sharing.value = false
   }

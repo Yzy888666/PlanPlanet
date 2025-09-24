@@ -84,3 +84,62 @@ export const unsharePlan = (id) => {
     method: 'post'
   })
 }
+
+// ========== 计划广场相关API ==========
+
+// 获取公共计划列表（计划广场）
+export const getPublicPlans = (params) => {
+  return request({
+    url: '/square/plans',
+    method: 'get',
+    params
+  })
+}
+
+// 获取广场计划详情
+export const getSquarePlanDetail = (id) => {
+  return request({
+    url: `/square/plans/${id}`,
+    method: 'get'
+  })
+}
+
+// 点赞计划
+export const likePlan = (id) => {
+  return request({
+    url: `/square/plans/${id}/like`,
+    method: 'post'
+  })
+}
+
+// 取消点赞计划
+export const unlikePlan = (id) => {
+  return request({
+    url: `/square/plans/${id}/unlike`,
+    method: 'post'
+  })
+}
+
+// 收藏计划
+export const favoritePlan = (id) => {
+  return request({
+    url: `/square/plans/${id}/favorite`,
+    method: 'post'
+  })
+}
+
+// 取消收藏计划
+export const unfavoritePlan = (id) => {
+  return request({
+    url: `/square/plans/${id}/unfavorite`,
+    method: 'post'
+  })
+}
+
+// 复制计划到我的计划
+export const copyPlan = (id) => {
+  return request({
+    url: `/square/plans/${id}/copy`,
+    method: 'post'
+  })
+}

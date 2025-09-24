@@ -77,6 +77,15 @@
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/user'
+import {
+  House,
+  Calendar,
+  Grid,
+  User,
+  ArrowDown,
+  Expand,
+  Fold
+} from '@element-plus/icons-vue'
 
 const router = useRouter()
 const userStore = useUserStore()
